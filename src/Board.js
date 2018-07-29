@@ -29,17 +29,46 @@ class Board extends Component{
 
 class Square extends Component{
 
+    constructor(props){
+        super(props);
+        this.state = {
+            value: null,
+        };
+    };
+    // if I want define a method using this, I must wrap method definition into one life cycle method
+    
+    // componentDidMount(){
+    //     let currentComponent = this; // "this" doesn't go inside methods which are not life cycle method such as render() or componentDidMount()
+        
+    //     clickChange(){
+    //         console.log(1);
+    //         console.log(this);
+    //         currentComponent.setState({
+    //             value: "X",
+    //         });
+    //     };
+    // };
 
-    clickAlert(){
-        alert("hello");
-    }
+    // clickChange(){
+    //     console.log(1);
+    //     console.log(this);
+    //     let currentComponent = this; // "this" doesn't go inside methods which are not life cycle method such as render() or componentDidMount()
+    //     currentComponent.setState({
+    //         value: "X",
+    //     });
+    // }
+    // componentWillUpdate(){
+    //     console.log(this);
+    // };
     render(){
+        console.log(this);
         return(
-            <button onClick={this.clickAlert}>
-                {this.props.value}
+            <button className="square" onClick={() => this.setState({value: "X"})}> 
+                {this.state.value}
             </button>
         )
     }
+    //why this.setState works well in arrow function or? in render()
 }
 
 export default Board;
