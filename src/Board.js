@@ -5,21 +5,16 @@ class Board extends Component{
         super(props);
         this.state = {
             squares: Array(9).fill(null),
-            player: "X"
+            xIsNext: true,
         }
     }
     handleClick(i){
         const squares = this.state.squares.slice();
-        squares[i] = this.state.player;
+        squares[i] = this.state.xIsNext? "X": "O";
         this.setState({
             squares: squares,
+            xIsNext: !this.state.xIsNext,
         });
-        if(this.state.player === "X"){
-            this.setState({player: "O"})
-        }
-        else{
-            this.setState({player: "X"})
-        }
     }
     renderSquare(i){
         return <Square value={this.state.squares[i]} onClick={() => this.handleClick(i)} />
