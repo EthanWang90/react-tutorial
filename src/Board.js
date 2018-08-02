@@ -5,6 +5,7 @@ class Board extends Component{
         super(props);
         this.state = {
             squares: Array(9).fill(null),
+            history: Array(9).fill(null),
             xIsNext: true,
         }
     }
@@ -35,6 +36,7 @@ class Board extends Component{
         this.setState({
             squares: squares,
             xIsNext: !this.state.xIsNext,
+            history: squares
         });
     }
     renderSquare(i){
@@ -42,6 +44,7 @@ class Board extends Component{
     }
     render(){
         const winner = this.calcWinner(this.state.squares);
+        let records = this.state.history;
         let status;
         if(winner){
             status = "The winner is: " + winner;
@@ -51,26 +54,39 @@ class Board extends Component{
         }
         return(
             <div>
-                <div>
-                    {status}
-                </div>
-                <div>
-                    <div className="row1">
-                        {this.renderSquare(0)}
-                        {this.renderSquare(1)}
-                        {this.renderSquare(2)}
-                    </div>                
-                    <div className="row2">
-                        {this.renderSquare(3)}
-                        {this.renderSquare(4)}
-                        {this.renderSquare(5)}
-                    </div>                
-                    <div className="row3">
-                        {this.renderSquare(6)}
-                        {this.renderSquare(7)}
-                        {this.renderSquare(8)}
-                    </div>
-                </div>
+                <table>
+                    <tr>
+                        <td>
+                            <div>
+                                <div>
+                                    {status}
+                                </div>
+                                <div>
+                                    <div className="row1">
+                                        {this.renderSquare(0)}
+                                        {this.renderSquare(1)}
+                                        {this.renderSquare(2)}
+                                    </div>                
+                                    <div className="row2">
+                                        {this.renderSquare(3)}
+                                        {this.renderSquare(4)}
+                                        {this.renderSquare(5)}
+                                    </div>                
+                                    <div className="row3">
+                                        {this.renderSquare(6)}
+                                        {this.renderSquare(7)}
+                                        {this.renderSquare(8)}
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                {records}
+                            </div>
+                        </td>
+                    </tr>
+                </table>
             </div>
         );
     }
